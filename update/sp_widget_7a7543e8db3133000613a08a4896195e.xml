@@ -6,6 +6,7 @@
 	var c = this;
 
 	$rootScope.$on('selectNote', function(event,data) {
+		// 入力データ取得
 		c.server.get({
 			action: 'getNote',
 			noteID: $rootScope.noteID
@@ -15,7 +16,19 @@
 			c.data.noteID = r.data.note.sys_id;
 		});
 	});
+	
+	// 確認ダイアログの表示
+	c.confirmDelete = function(){
+		// spModal.confirm("Are you sure you want to delete this Note record?").then(function(confirmed){
+		spModal.confirm("削除したデータは元に戻りません。本当に削除してもよろしいですか?").then(function(confirmed){
+			if(confirmed){
+				// 削除処理実行
+				c.deleteNote();
+			}
+		});
+	}
 
+	// 入力データ更新
 	c.updateNote = function(updateType) {
 		c.server.get({
 			action: 'updateNote',
@@ -29,6 +42,8 @@
 			}
 		});
 	}
+	
+	// 入力データ削除
 	c.deleteNote = function() {
 		c.server.get({
 			action: 'deleteNote',
@@ -88,14 +103,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-30 18:16:57</sys_created_on>
         <sys_id>7a7543e8db3133000613a08a4896195e</sys_id>
-        <sys_mod_count>8</sys_mod_count>
+        <sys_mod_count>10</sys_mod_count>
         <sys_name>Notes  Body</sys_name>
         <sys_package display_value="CreateNotes" source="x_snc_createnotes">df5fd9a5090232007f44e1046c8ff69f</sys_package>
         <sys_policy/>
         <sys_scope display_value="CreateNotes">df5fd9a5090232007f44e1046c8ff69f</sys_scope>
         <sys_update_name>sp_widget_7a7543e8db3133000613a08a4896195e</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-30 19:09:11</sys_updated_on>
+        <sys_updated_by>takyamashita</sys_updated_by>
+        <sys_updated_on>2022-04-19 06:29:05</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default" ng-show="c.data.noteID">
   <div class="panel-heading clearfix">
     <div class="row">
